@@ -61,7 +61,7 @@ public class Vector : MonoBehaviour
     {
         Vector2 dir = PointB.transform.position - transform.position;
         dir = dir.normalized;
-
+        test
         Vector2 lookAt = transform.right;
 
         float dot = Vector2.Dot(dir, lookAt);
