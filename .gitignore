@@ -75,3 +75,21 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # End of https://www.toptal.com/developers/gitignore/api/unity
+UIElementsSchema/UIElements.xsd
+UIElementsSchema/Unity.Cloud.Collaborate.Components.ChangeListEntries.xsd
+UIElementsSchema/Unity.Cloud.Collaborate.Components.xsd
+UIElementsSchema/Unity.Cloud.Collaborate.Views.xsd
+UIElementsSchema/Unity.Profiling.Editor.xsd
+UIElementsSchema/Unity.UI.Builder.xsd
+UIElementsSchema/UnityEditor.Experimental.GraphView.xsd
+UIElementsSchema/UnityEditor.Overlays.xsd
+UIElementsSchema/UnityEditor.PackageManager.UI.Internal.xsd
+UIElementsSchema/UnityEditor.Search.xsd
+UIElementsSchema/UnityEditor.ShortcutManagement.xsd
+UIElementsSchema/UnityEditor.U2D.Animation.xsd
+UIElementsSchema/UnityEditor.U2D.Layout.xsd
+UIElementsSchema/UnityEditor.UIElements.Debugger.xsd
+UIElementsSchema/UnityEditor.UIElements.xsd
+UIElementsSchema/UnityEngine.UIElements.xsd
+UserSettings/Layouts/default-2021.dwlt
+UserSettings/Layouts/default-2021.dwlt
