@@ -17,10 +17,21 @@ public class Vector : MonoBehaviour
 
     public GameObject PointB;
 
+    public GameObject PointC;
+
+    public Vector2 point;
+
     private void OnDrawGizmos()
     {
         //Exercice1();
-        Exercice2();
+        //Exercice2();
+        Vector2 objPos = transform.position;
+        Vector2 righ = transform.right;
+        Vector2 up = transform.up;
+        Vector2 objPosB = transform.position;
+        Vector2 righB = transform.right;
+        Vector2 upB = transform.up;
+        Exercice3WorldToLocal();
     }
 
     private void pointAlongDirection()
@@ -37,6 +48,7 @@ public class Vector : MonoBehaviour
         Gizmos.DrawSphere((Vector2)transform.position + offsetVec, 0.05f);
     }
 
+    #region Basic vector Math
     private void Exercice1()
     {
 
@@ -62,7 +74,6 @@ public class Vector : MonoBehaviour
         Vector2 dir = PointB.transform.position - transform.position;
         dir = dir.normalized;
         Vector2 lookAt = transform.right;
-
         float dot = Vector2.Dot(dir, lookAt);
         dotV = dot;
         bool isLooking = dot >= Threshold;
@@ -75,23 +86,50 @@ public class Vector : MonoBehaviour
 
 
     }
-    /*     private void Exercice2()
-        {
-            Gizmos.color = Color.white;
-            Vector3 direction = transform.TransformDirection(Vector3.right)*Unit;
 
-            RaycastHit hit;
+    private void Exercice3WorldToLocal()
+    {
+        
+        Transform pointBPos = PointB.transform;
+        Transform pointCPos = PointC.transform;
+        Vector2 relPoint = pointBPos.position - pointCPos.position;
+                Vector2 rightB = PointB.transform.right;
+        Vector2 upB = PointB.transform.up;
+        float x = Vector2.Dot ( relPoint,rightB );
+        float y = Vector2.Dot ( relPoint,upB );
+        pointCPos.position =  new Vector2 (x,y);
+        //Vector3.Distance(pointBPos.position,Vector2.zero);
+        //PointC.transform.position = ((Vector2)PointB.transform.position - Vector2.zero) + (Vector2)(point.x *PointB.transform.up + point.y*PointB.transform.right);
+        DrawBasicVectors(pointBPos.position,pointCPos.right,pointCPos.up);
+        Gizmos.DrawSphere(PointC.transform.position, 0.2f);
+        //Vector2 length = (transform.position + ( transform.position + PointB.transform.position));
+        //length = new Vector2 ( (length.x * PointB.transform.up), (length.y*PointB.transform.right));
+        //objectA.position + ( pointB.position * objectA.transformUp)
+    }
 
-            if(Physics.Raycast(transform.position,direction, out hit, Unit)){
-                Gizmos.color = Color.red;
-                //Vector3.Dot(dir, hit.normal);
-            }
-            Gizmos.DrawRay(transform.position,direction);
-        } */
+    private void Exercice3LocalToWorld(){
+        Vector2 objPos = transform.position;
+        Vector2 right = transform.right;
+        Vector2 up = transform.up;
+        Vector2 objPosB = PointB.transform.position;
+        Vector2 rightB = PointB.transform.right;
+        Vector2 upB = PointB.transform.up;
+        Vector2 worldOffset = rightB*point.x + upB* point.y;
+        PointC.transform.position = objPosB + worldOffset; 
+        Gizmos.DrawSphere(PointC.transform.position, 0.5f);
+    }
 
-    /*     private void Exercice3 () {
-            Vector2 objPos = transform.position;
-            Vector2 right = transform.right;
-            Vector2 up = transform.up;
-        } */
+    #endregion
+
+    #region tool
+
+    void DrawBasicVectors(Vector2 pos , Vector2 right, Vector2 up){
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay ( pos, right);
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay (pos, up);
+        Gizmos.color = Color.white;
+    }
+
+    #endregion
 }
