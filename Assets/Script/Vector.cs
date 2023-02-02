@@ -31,7 +31,7 @@ public class Vector : MonoBehaviour
         Vector2 objPosB = transform.position;
         Vector2 righB = transform.right;
         Vector2 upB = transform.up;
-        Exercice3WorldToLocal();
+        Exercice4();
     }
 
     private void pointAlongDirection()
@@ -92,19 +92,17 @@ public class Vector : MonoBehaviour
         
         Transform pointBPos = PointB.transform;
         Transform pointCPos = PointC.transform;
-        Vector2 relPoint = pointBPos.position - pointCPos.position;
-                Vector2 rightB = PointB.transform.right;
+        Vector2 relPoint = transform.position - PointB.transform.position;
+        Vector2 rightB = PointB.transform.right;
         Vector2 upB = PointB.transform.up;
         float x = Vector2.Dot ( relPoint,rightB );
         float y = Vector2.Dot ( relPoint,upB );
-        pointCPos.position =  new Vector2 (x,y);
         //Vector3.Distance(pointBPos.position,Vector2.zero);
         //PointC.transform.position = ((Vector2)PointB.transform.position - Vector2.zero) + (Vector2)(point.x *PointB.transform.up + point.y*PointB.transform.right);
-        DrawBasicVectors(pointBPos.position,pointCPos.right,pointCPos.up);
+        DrawBasicVectors(pointBPos.position,pointBPos.right,pointBPos.up);
+        PointC.transform.localPosition = new Vector2 (x,y);
+
         Gizmos.DrawSphere(PointC.transform.position, 0.2f);
-        //Vector2 length = (transform.position + ( transform.position + PointB.transform.position));
-        //length = new Vector2 ( (length.x * PointB.transform.up), (length.y*PointB.transform.right));
-        //objectA.position + ( pointB.position * objectA.transformUp)
     }
 
     private void Exercice3LocalToWorld(){
@@ -117,6 +115,18 @@ public class Vector : MonoBehaviour
         Vector2 worldOffset = rightB*point.x + upB* point.y;
         PointC.transform.position = objPosB + worldOffset; 
         Gizmos.DrawSphere(PointC.transform.position, 0.5f);
+    }
+
+    private void Exercice4 (){
+        Vector2 objPos = transform.position;
+        Vector2 objDir = transform.right;
+        Vector2 objUp = transform.up;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
+        DrawBasicVectors(objPos,objDir*2,objUp);
+        if (hit.collider != null)
+        {
+            DrawBasicVectors(hit.transform.position,hit.transform.right,hit.transform.up);
+        }
     }
 
     #endregion
